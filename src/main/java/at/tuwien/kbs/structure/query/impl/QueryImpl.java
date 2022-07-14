@@ -7,6 +7,7 @@ import at.tuwien.kbs.structure.query.Variable;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class QueryImpl implements Query {
 
@@ -55,5 +56,13 @@ public class QueryImpl implements Query {
     @Override
     public List<Variable> getHead() {
         return head;
+    }
+
+    @Override
+    public String toString() {
+        return "q(" +
+                this.head.stream().map(Variable::toString).collect(Collectors.joining(",")) +
+                "):-" +
+                this.body.stream().map(Atom::toString).collect(Collectors.joining(","));
     }
 }

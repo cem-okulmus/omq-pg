@@ -69,7 +69,6 @@ public class ConceptsImpl implements Concepts {
             subclasses = new HashSet<>(this.conceptNames);
             // iterate over all the axioms that have c on the right-hand side
             // and a class/conceptname on the left-hand side
-            // TODO test
             for (OWLClassExpression c: subclasses) {
                 this.conceptNames.addAll(o.getOntology().getSubClassAxiomsForSuperClass((OWLClass) c)
                         .stream()

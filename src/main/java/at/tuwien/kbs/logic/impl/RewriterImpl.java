@@ -4,12 +4,12 @@ import at.tuwien.kbs.logic.Rewriter;
 import at.tuwien.kbs.logic.Unifier;
 import at.tuwien.kbs.structure.ontology.Ontology;
 import at.tuwien.kbs.structure.query.*;
-import at.tuwien.kbs.structure.query.impl.ConceptsImpl;
-import at.tuwien.kbs.structure.query.impl.QueryImpl;
-import at.tuwien.kbs.structure.query.impl.UnboundVariableImpl;
+import at.tuwien.kbs.structure.query.impl.*;
 import org.semanticweb.owlapi.model.OWLAxiom;
+import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class RewriterImpl implements Rewriter {
 
@@ -36,6 +36,34 @@ public class RewriterImpl implements Rewriter {
                 for (Atom atom1: qp.getBody()) {
                     for (Atom atom2: qp.getBody()) {
                         Q.add(tau(reduce(qp, atom1, atom2)));
+                    }
+                }
+
+                // TODO make these loops more efficient with filtering
+                // (c) concatenate, if possible
+                for (Atom atom1: qp.getBody()) {
+                    for (Atom atom2: qp.getBody()) {
+                        if(atom1 instanceof Binary && atom2 instanceof ArbitraryLengthRoles && !atom1.equals(atom2)) {
+                            Q.add(tau(concatenate(qp, (Binary) atom1, (ArbitraryLengthRoles) atom2)));
+                        }
+                    }
+                }
+
+                // (d) merge atoms, if possible
+                for (Atom atom1: qp.getBody()) {
+                    for (Atom atom2: qp.getBody()) {
+                        if(atom1 instanceof Binary && atom2 instanceof Binary) {
+                            Q.addAll(merge(qp, (Binary) atom1, (Binary) atom2).stream()
+                                    .map(this::tau)
+                                    .collect(Collectors.toSet()));
+                        }
+                    }
+                }
+
+                // (e) drop atoms, if possible
+                for (Atom atom: qp.getBody()) {
+                    if (atom instanceof ArbitraryLengthRoles) {
+                        Q.add(tau(drop(qp, (ArbitraryLengthRoles) atom)));
                     }
                 }
             }
@@ -164,16 +192,199 @@ public class RewriterImpl implements Rewriter {
         return query;
     }
 
-    private void concatenate() {
-
+    private Query concatenate(Query query, Binary atom1, ArbitraryLengthRoles atom2) {
+        // small side-note: an unbound variable can become bound here, so we need to create new variables
+        // create a copy of the query
+        Query qp = new QueryImpl(new LinkedList<>(query.getHead()), new HashSet<>(query.getBody()));
+        Binary r1;
+        Binary r2;
+        if (atom1 instanceof Roles) {
+            if (atom2.getRoles().containsAll(atom1.getRoles())) {  // roles of atom 1 subset of roles of atom 2
+                // check terms
+                if (atom1.getLeft().equals(atom2.getLeft())) {  // append to front
+                    return concatenateRoleToFront(qp, atom1, atom2);
+                } else if (atom1.getRight().equals(atom2.getRight())) {  // append to back
+                    return concatenateRoleToBack(qp, atom1, atom2);
+                }
+            } else {  // check the inverse
+                atom1 = ((Roles) atom1).getInverse();  // check the inverse
+                if (atom2.getRoles().containsAll(atom1.getRoles())) {  // roles of atom 1 subset of roles of atom 2
+                    if (atom1.getLeft().equals(atom2.getLeft())) {  // append to front
+                        return concatenateRoleToFront(qp, atom1, atom2);
+                    } else if (atom1.getRight().equals(atom2.getRight())) {  // append to back
+                        return concatenateRoleToBack(qp, atom1, atom2);
+                    }
+                }
+            }
+        } else {  // atom1 is also an ArbitraryLengthRole
+            if (atom2.getRoles().containsAll(atom1.getRoles())) { // roles of atom1 subset of roles of atom2
+                // check vars
+                if (atom1.getLeft().equals(atom2.getLeft())) {  // append to front
+                    // remove atoms
+                    qp.getBody().remove(atom1);
+                    qp.getBody().remove(atom2);
+                    // generate new atoms
+                    r1 = new ArbitraryLengthRolesImpl(atom1.getRoles(), new VariableImpl(atom1.getLeft().getName()),
+                            new VariableImpl(atom1.getRight().getName()));
+                    r2 = new ArbitraryLengthRolesImpl(atom2.getRoles(), new VariableImpl(atom1.getRight().getName()),
+                            new VariableImpl(atom2.getRight().getName()));
+                    // add atoms to query body
+                    qp.getBody().add(r1);
+                    qp.getBody().add(r2);
+                    // return result
+                    return qp;
+                } else if (atom1.getRight().equals(atom2.getRight())) {  // append to back
+                    // remove atoms
+                    qp.getBody().remove(atom1);
+                    qp.getBody().remove(atom2);
+                    // generate new atoms
+                    r1 = new ArbitraryLengthRolesImpl(atom1.getRoles(), new VariableImpl(atom1.getLeft().getName()),
+                            new VariableImpl(atom1.getRight().getName()));
+                    r2 = new ArbitraryLengthRolesImpl(atom2.getRoles(), new VariableImpl(atom2.getLeft().getName()),
+                            new VariableImpl(atom1.getLeft().getName()));
+                    // add atoms to query body
+                    qp.getBody().add(r1);
+                    qp.getBody().add(r2);
+                    // return result
+                    return qp;
+                }
+            }
+        }
+        // if no concatenation possible, return original query
+        return query;
     }
 
-    private void merge() {
-
+    private Query concatenateRoleToFront(Query qp, Binary atom1, ArbitraryLengthRoles atom2) {
+        // remove atoms
+        qp.getBody().remove(atom1);
+        qp.getBody().remove(atom2);
+        // generate new atoms
+        Roles r1 = new RolesImpl(atom1.getRoles(), new VariableImpl(atom1.getLeft().getName()),
+                new VariableImpl(atom1.getRight().getName()));
+        ArbitraryLengthRoles r2 = new ArbitraryLengthRolesImpl(atom2.getRoles(), new VariableImpl(atom1.getRight().getName()),
+                new VariableImpl(atom2.getRight().getName()));
+        // add atoms to query body
+        qp.getBody().add(r1);
+        qp.getBody().add(r2);
+        // return result
+        return qp;
     }
 
-    private void drop() {
+    private Query concatenateRoleToBack(Query qp, Binary atom1, ArbitraryLengthRoles atom2) {
+        // remove atoms
+        qp.getBody().remove(atom1);
+        qp.getBody().remove(atom2);
+        // generate new atoms
+        Roles r1 = new RolesImpl(atom1.getRoles(), new VariableImpl(atom1.getLeft().getName()),
+                new VariableImpl(atom1.getRight().getName()));
+        ArbitraryLengthRoles r2 = new ArbitraryLengthRolesImpl(atom2.getRoles(), new VariableImpl(atom2.getLeft().getName()),
+                new VariableImpl(atom1.getLeft().getName()));
+        // add atoms to query body
+        qp.getBody().add(r1);
+        qp.getBody().add(r2);
+        // return result
+        return qp;
+    }
 
+    private Set<Query> merge(Query query, Binary atom1, Binary atom2) {
+        Set<OWLObjectPropertyExpression> intersection;
+        Set<Query> merges = new HashSet<>();
+        Binary r1;
+        Binary r2;
+        Unifier unifier;
+        if (atom1 instanceof Roles) {
+            // compute first intersection
+            intersection = new HashSet<>(atom1.getRoles());
+            intersection.retainAll(atom2.getRoles());
+            if (intersection.size() > 0) {
+                // do the terms of a1 and a2 unify?
+                unifier = new UnifierImpl(Arrays.asList(atom1.getLeft(), atom1.getRight()),
+                        Arrays.asList(atom2.getLeft(), atom2.getRight()));
+                if (unifier.getSubstitutions().size() > 0) {
+                    // create a copy of the query
+                    Query qp = new QueryImpl(new LinkedList<>(query.getHead()), new HashSet<>(query.getBody()));
+                    // remove atoms
+                    qp.getBody().remove(atom1);
+                    qp.getBody().remove(atom2);
+                    // generate new atoms
+                    r1 = new RolesImpl(intersection, atom1.getLeft(), atom1.getRight());
+                    r2 = new RolesImpl(intersection, atom2.getLeft(), atom2.getRight());
+                    // add atoms to query body
+                    qp.getBody().add(r1);
+                    qp.getBody().add(r2);
+                    // add the result of unification to the result
+                    merges.add(unifier.apply(qp));
+                }
+            }
+            // compute second intersection on the inverse of atom1
+            atom1 = ((Roles) atom1).getInverse();
+            intersection = new HashSet<>(atom1.getRoles());
+            intersection.retainAll(atom2.getRoles());
+            if (intersection.size() > 0) {
+                // do the terms of atom1 and atom2 unify?
+                unifier = new UnifierImpl(Arrays.asList(atom1.getLeft(), atom1.getRight()),
+                        Arrays.asList(atom2.getLeft(), atom2.getRight()));
+                if (unifier.getSubstitutions().size() > 0) {
+                    // create a copy of the query
+                    Query qp = new QueryImpl(new LinkedList<>(query.getHead()), new HashSet<>(query.getBody()));
+                    // remove atoms
+                    qp.getBody().remove(atom1);
+                    qp.getBody().remove(atom2);
+                    // generate new atoms
+                    r1 = new RolesImpl(intersection, atom1.getLeft(), atom1.getRight());
+                    r2 = new RolesImpl(intersection, atom2.getLeft(), atom2.getRight());
+                    // add atoms to query body
+                    qp.getBody().add(r1);
+                    qp.getBody().add(r2);
+                    // add the result of unification to the result
+                    merges.add(unifier.apply(qp));
+                }
+            }
+        } else {  // arbitrary length atom - only directed roles
+            intersection = new HashSet<>(atom1.getRoles());
+            intersection.retainAll(atom2.getRoles());
+            if (intersection.size() > 0) {
+                // do the terms of atom1 and atom2 unify?
+                unifier = new UnifierImpl(Arrays.asList(atom1.getLeft(), atom1.getRight()),
+                        Arrays.asList(atom2.getLeft(), atom2.getRight()));
+                if (unifier.getSubstitutions().size() > 0) {
+                    // create a copy of the query
+                    Query qp = new QueryImpl(new LinkedList<>(query.getHead()), new HashSet<>(query.getBody()));
+                    // remove atoms
+                    qp.getBody().remove(atom1);
+                    qp.getBody().remove(atom2);
+                    // generate new atoms
+                    if (atom2 instanceof ArbitraryLengthRoles) {
+                        r1 = new ArbitraryLengthRolesImpl(intersection, atom1.getLeft(), atom1.getRight());
+                        r2 = new ArbitraryLengthRolesImpl(intersection, atom2.getLeft(), atom2.getRight());
+                    } else {
+                        r1 = new RolesImpl(intersection, atom1.getLeft(), atom1.getRight());
+                        r2 = new RolesImpl(intersection, atom2.getLeft(), atom2.getRight());
+                    }
+                    // add atoms to query body
+                    qp.getBody().add(r1);
+                    qp.getBody().add(r2);
+
+                    // add the result of unification to the result
+                    merges.add(unifier.apply(qp));
+                }
+            }
+        }
+        return merges;
+    }
+
+    private Query drop(Query query, ArbitraryLengthRoles atom) {
+        // remember: no empty query body!
+        if (query.getBody().size() > 1 &&
+                (atom.getLeft() instanceof UnboundVariable || atom.getRight() instanceof UnboundVariable)) {
+            // create copy of query
+            Query qp = new QueryImpl(new LinkedList<>(query.getHead()), new HashSet<>(query.getBody()));
+            // remove arb. length atom with unbound variable
+            qp.getBody().remove(atom);
+            // return new query
+            return qp;
+        }
+        return query;
     }
 
     private Query saturate(Query query, Ontology ontology) {
