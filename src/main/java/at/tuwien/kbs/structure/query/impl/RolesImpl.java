@@ -159,52 +159,41 @@ public class RolesImpl implements Roles {
             // Therefore, the right-hand side is of the form OWLObjectSomeValuesFrom such that the axiom is applicable.
             // Furthermore, we know we can replace the atom with an expression of the left-hand side.
             // The left-hand side can be \exists r, \exists r^-, or A
+
+            // get the property on the right-hand side
+            OWLObjectPropertyExpression rhs = ((OWLObjectSomeValuesFrom) ((OWLSubClassOfAxiom) i).getSuperClass()).getProperty();
             if (((OWLSubClassOfAxiom) i).getSubClass() instanceof OWLClass) { // A
-                if (this.right instanceof UnboundVariable && // A \ISA \exists R, R(x,_)
-                        this.roles.contains(((OWLObjectSomeValuesFrom) ((OWLSubClassOfAxiom) i).getSuperClass()).getProperty())) {
+                OWLClass subclass = (OWLClass) ((OWLSubClassOfAxiom) i).getSubClass();
+                if (this.right instanceof UnboundVariable && this.roles.contains(rhs)) { // A \ISA \exists R, R(x,_)
                     // return A(x)
-                    return new ConceptsImpl(new HashSet<>(Collections.singleton(((OWLSubClassOfAxiom) i).getSubClass())), this.left.getFresh());
+                    return new ConceptsImpl(new HashSet<>(Collections.singleton(subclass)), this.left.getFresh());
                 }
                 // A \ISA \exists R, R-(_,y)
                 // return A(y)
-                return new ConceptsImpl(new HashSet<>(Collections.singleton(((OWLSubClassOfAxiom) i).getSubClass())), this.right.getFresh());
-            } else { // \exists R
+                return new ConceptsImpl(new HashSet<>(Collections.singleton(subclass)), this.right.getFresh());
+            } else { // \exists R1 \ISA \exists R
                 OWLObjectSomeValuesFrom subclass = (OWLObjectSomeValuesFrom) ((OWLSubClassOfAxiom) i).getSubClass();
-                if (subclass.getProperty() instanceof OWLObjectInverseOf) { // exists r^-
-                    return applyRangeAxiomOnProperty(subclass.getProperty().getInverseProperty());
-                } else {
-                    return applyDomainAxiomOnProperty(subclass.getProperty());
-                }
+                return applyDomainOrRangeAxiom(subclass.getProperty(), rhs);
             }
         } else if (i instanceof OWLObjectPropertyRangeAxiom) { // \exists r^-
-            return applyRangeAxiomOnProperty(((OWLObjectPropertyRangeAxiom) i).getProperty());
+            // don't forget to take the inverse here
+            OWLObjectPropertyExpression lhs = ((OWLObjectPropertyRangeAxiom) i).getProperty().getInverseProperty();
+            OWLClassExpression range = ((OWLObjectPropertyRangeAxiom) i).getRange();
+            OWLObjectPropertyExpression rhs = ((OWLObjectSomeValuesFrom) range).getProperty();
+            return applyDomainOrRangeAxiom(lhs, rhs);
         } else { // \exists r
-            return applyDomainAxiomOnProperty(((OWLObjectPropertyDomainAxiom) i).getProperty());
+            OWLObjectPropertyExpression lhs = ((OWLObjectPropertyDomainAxiom) i).getProperty();
+            OWLClassExpression domain = ((OWLObjectPropertyDomainAxiom) i).getDomain();
+            OWLObjectPropertyExpression rhs = ((OWLObjectSomeValuesFrom) domain).getProperty();
+            return applyDomainOrRangeAxiom(lhs, rhs);
         }
     }
 
-    private Atom applyRangeAxiomOnProperty(OWLObjectPropertyExpression property) {
-        if (this.right instanceof UnboundVariable && this.roles.contains(property)) {
-            // R(x,_)
-            return new RolesImpl(new HashSet<>(Collections.singleton(property)), this.right.getFresh(),
-                    this.left.getFresh());
-        } else {
-            // R-(_,y)
-            return new RolesImpl(new HashSet<>(Collections.singleton(property.getInverseProperty())),
-                    this.right.getFresh(), this.left.getFresh());
+    private Atom applyDomainOrRangeAxiom(OWLObjectPropertyExpression lhs, OWLObjectPropertyExpression rhs) {
+        if (this.roles.contains(rhs) && this.right instanceof UnboundVariable) {
+            return new RolesImpl(new HashSet<>(Collections.singleton(lhs)), this.getLeft(), this.getRight());
         }
-    }
-
-    private Atom applyDomainAxiomOnProperty(OWLObjectPropertyExpression property) {
-        if (this.right instanceof UnboundVariable && this.roles.contains(property)) {
-            // R(x,_)
-            return new RolesImpl(new HashSet<>(Collections.singleton(property)), this.left.getFresh(),
-                    this.right.getFresh());
-        } else {
-            // R-(_,y)
-            return new RolesImpl(new HashSet<>(Collections.singleton(property.getInverseProperty())),
-                    this.left.getFresh(), this.right.getFresh());
-        }
+        return new RolesImpl(new HashSet<>(Collections.singleton(lhs)), this.getRight(), this.getLeft());
     }
 
     @Override

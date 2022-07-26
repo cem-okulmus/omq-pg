@@ -52,7 +52,7 @@ public class RewriterImpl implements Rewriter {
                 // (d) merge atoms, if possible
                 for (Atom atom1: qp.getBody()) {
                     for (Atom atom2: qp.getBody()) {
-                        if(atom1 instanceof Binary && atom2 instanceof Binary) {
+                        if(atom1 instanceof Binary && atom2 instanceof Binary && !atom1.equals(atom2)) {
                             Q.addAll(merge(qp, (Binary) atom1, (Binary) atom2).stream()
                                     .map(this::tau)
                                     .collect(Collectors.toSet()));
