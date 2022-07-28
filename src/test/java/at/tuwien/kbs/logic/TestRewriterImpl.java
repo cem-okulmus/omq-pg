@@ -182,7 +182,7 @@ public class TestRewriterImpl {
         Query q;
         Set<Query> Q;
 
-        // q():-t(y,z1),s*(z1,z2),r(z2,x)
+        // q(x):-t(y,z1),s*(z1,z2),r(z2,x)
         q = new QueryImpl(new LinkedList<>(Collections.singleton(new VariableImpl("x"))),
                 new HashSet<>(Arrays.asList(
                         new RolesImpl(

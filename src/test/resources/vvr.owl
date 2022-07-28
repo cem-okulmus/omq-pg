@@ -1,0 +1,533 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/nikol/ontologies/2022/3/untitled-ontology-23#"
+     xml:base="http://www.semanticweb.org/nikol/ontologies/2022/3/untitled-ontology-23"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/nuscenes/hierarchy"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#FIRST -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#FIRST">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#FIRST_ANNOTATION -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#FIRST_ANNOTATION">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#HAS -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#HAS">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#LAST -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#LAST">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#LAST_ANNOTATION -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#LAST_ANNOTATION">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#NEXT -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#NEXT">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#OF -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#OF">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#abnormal_or_traffic_violation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#abnormal_or_traffic_violation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#adult -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#adult">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#pedestrian"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#ambulance -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#ambulance">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#emergency"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#animal -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#animal"/>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#barrier -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#barrier">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#movable_object"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#bendybus -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#bendybus">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#bus"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#bicycle -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#bicycle">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#vehicle"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#bicycle_rack -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#bicycle_rack">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#static_object"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#bus -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#bus">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#vehicle"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#car -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#car">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#vehicle"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#child -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#child">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#pedestrian"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#construction_worker -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#construction_worker">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#pedestrian"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#constructionvehicle -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#constructionvehicle">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#vehicle"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#cycle_with_rider -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#cycle_with_rider"/>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#cycle_without_rider -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#cycle_without_rider"/>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#debris -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#debris">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#movable_object"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#driving_straight_forward -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#driving_straight_forward">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#vehicle_moving"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#emergency -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#emergency">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#vehicle"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#gliding_on_wheels -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#gliding_on_wheels">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#vehicle_moving"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#human -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#human"/>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#lane_change_left -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#lane_change_left">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#vehicle_moving"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#lane_change_right -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#lane_change_right">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#vehicle_moving"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#left_turn -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#left_turn">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#vehicle_moving"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#loss_of_control -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#loss_of_control">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#vehicle_moving"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#motorcycle -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#motorcycle">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#vehicle"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#movable_object -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#movable_object"/>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#moving -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#moving"/>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#other_motion -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#other_motion">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#vehicle_moving"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#pedestrian -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#pedestrian">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#human"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#pedestrian_moving -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#pedestrian_moving">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#moving"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#pedestrian_sitting_lying_down -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#pedestrian_sitting_lying_down">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#pedestrian_stationary"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#pedestrian_standing -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#pedestrian_standing">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#pedestrian_stationary"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#pedestrian_stationary -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#pedestrian_stationary">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#stationary"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#personal_mobility -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#personal_mobility">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#pedestrian"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#police -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#police">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#emergency"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#police_officer -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#police_officer">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#pedestrian"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#pushable_pullable -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#pushable_pullable">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#movable_object"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#reversing -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#reversing">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#vehicle_moving"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#right_turn -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#right_turn">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#vehicle_moving"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#rigidbus -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#rigidbus">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#bus"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#running -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#running">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#pedestrian_moving"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#sample -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#sample"/>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#scene -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#scene"/>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#sitting -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#sitting">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#pedestrian_sitting_lying_down"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#static_object -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#static_object"/>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#stationary -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#stationary"/>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#stopped -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#stopped">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#stationary"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#stroller -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#stroller">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#pedestrian"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#trafficcone -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#trafficcone">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#movable_object"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#trailer -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#trailer">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#vehicle"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#truck -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#truck">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#vehicle"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#u_turn -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#u_turn">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#vehicle_moving"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#vehicle -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#vehicle"/>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#vehicle_moving -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#vehicle_moving">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#moving"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#vehicle_parked -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#vehicle_parked">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#stationary"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#vehicle_stopped -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#vehicle_stopped">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#stopped"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#walking -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#walking">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#pedestrian_moving"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nuscenes/hierarchy#wheelchair -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nuscenes/hierarchy#wheelchair">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nuscenes/hierarchy#pedestrian"/>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

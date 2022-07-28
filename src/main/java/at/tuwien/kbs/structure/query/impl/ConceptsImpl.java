@@ -51,13 +51,13 @@ public class ConceptsImpl implements Concepts {
 
     @Override
     public String toString() {
-        String rolestring = this.conceptNames.stream()
-                .map(p -> p.asOWLClass().getIRI().getFragment() + ((p instanceof OWLObjectInverseOf) ? "-" : ""))
+        String conceptString = this.conceptNames.stream()
+                .map(p -> p.asOWLClass().getIRI().getFragment())
                 .collect(Collectors.joining("|"));
         if (this.conceptNames.size() > 1) {
-            rolestring = '(' + rolestring + ')';
+            conceptString = '(' + conceptString + ')';
         }
-        return rolestring + '(' + this.term.toString() + ')';
+        return conceptString + '(' + this.term.toString() + ')';
     }
 
     @Override
