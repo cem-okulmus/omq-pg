@@ -9,10 +9,6 @@ import at.tuwien.kbs.structure.parser.impl.QueryParserImpl;
 import at.tuwien.kbs.structure.query.Query;
 import at.tuwien.kbs.translation.Translator;
 import at.tuwien.kbs.translation.impl.CypherTranslator;
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.jupiter.api.Test;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 

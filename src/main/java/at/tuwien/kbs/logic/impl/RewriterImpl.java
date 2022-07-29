@@ -39,7 +39,7 @@ public class RewriterImpl implements Rewriter {
                     }
                 }
 
-                // TODO make these loops more efficient with filtering
+                // TODO make these loops more efficient with filtering?
                 // (c) concatenate, if possible
                 for (Atom atom1: qp.getBody()) {
                     for (Atom atom2: qp.getBody()) {

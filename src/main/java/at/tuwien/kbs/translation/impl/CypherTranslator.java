@@ -12,6 +12,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * A class that translates a query into Cypher for Neo4j.
+ */
 public class CypherTranslator implements Translator {
 
     @Override
@@ -20,6 +23,13 @@ public class CypherTranslator implements Translator {
         return String.join("\nunion\n", queryStrings);
     }
 
+    /**
+     * Translate a single query to a Cypher query.
+     *
+     * @param answerVars The answer variables to the query.
+     * @param query The query to be translated into Cypher
+     * @return A string representation of the query in Cypher.
+     */
     private String queryToCypher(List<Variable> answerVars, Query query) {
         int variableCounter = 0;
         Set<String> matchClauses = new HashSet<>();

@@ -4,10 +4,15 @@ import org.semanticweb.owlapi.model.OWLClassExpression;
 
 import java.util.Set;
 
-public interface Concepts extends Atom {
+/**
+ * An interface that represents the functions of atom with concepts.
+ */
+public interface Concepts extends Unary {
 
-    Term getTerm();
-
+    /**
+     * Get the set of concepts contained in the atom.
+     * @return The set of concepts.
+     */
     Set<OWLClassExpression> getConceptNames();
 
 }
