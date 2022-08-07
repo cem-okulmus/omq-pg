@@ -4,6 +4,7 @@ import at.tuwien.kbs.generated.QBaseVisitor;
 import at.tuwien.kbs.generated.QLexer;
 import at.tuwien.kbs.generated.QParser;
 import at.tuwien.kbs.structure.ontology.Ontology;
+import at.tuwien.kbs.structure.parser.QueryParser;
 import at.tuwien.kbs.structure.query.*;
 import at.tuwien.kbs.structure.query.impl.*;
 import org.antlr.v4.runtime.CharStream;
@@ -19,7 +20,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-public class QueryParserImpl extends QBaseVisitor<Object> {
+public class QueryParserImpl extends QBaseVisitor<Object> implements QueryParser {
 
     private final Ontology ontology;
 
