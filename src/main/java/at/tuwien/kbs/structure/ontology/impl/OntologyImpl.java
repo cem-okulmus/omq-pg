@@ -21,6 +21,7 @@ public class OntologyImpl implements Ontology {
      * The OWL2 QL ontology to be used in QA.
      */
     private final OWLOntology ontology;
+    private final OWLOntologyManager manager;
     /**
      * A Map that maps simple class names/labels to the class in the ontology.
      */
@@ -44,9 +45,22 @@ public class OntologyImpl implements Ontology {
             throw new NotOWL2QLException();
         }
         this.ontology = ontology;
+        this.manager = manager;
         generateClassMap();
         generatePropertyMap();
     }
+
+
+    public OWLClass addClass(String name) {
+
+        OWLDataFactory df = OWLManager.getOWLDataFactory();
+        OWLEntity entity = df.getOWLEntity(EntityType.CLASS, IRI.create(name));
+        OWLAxiom declare = df.getOWLDeclarationAxiom(entity);
+        manager.addAxiom(this.ontology,declare);
+
+        return (OWLClass) entity;
+    }
+
 
     /**
      * Generate a map "A" -> ...#A (as OWLClass) from the ontology's signature.

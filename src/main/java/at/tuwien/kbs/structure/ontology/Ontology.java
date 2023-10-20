@@ -15,6 +15,8 @@ public interface Ontology {
      */
     public Map<String, OWLClass> getClassMap();
 
+
+
     /**
      * Get the object property map.
      * @return Map of object property names and their OWLObjectProperties.
@@ -32,5 +34,8 @@ public interface Ontology {
      * @return Set of OWL QL axioms.
      */
     public Set<OWLAxiom> getAxioms();
+
+
+    public OWLClass addClass(String name);
 
 }

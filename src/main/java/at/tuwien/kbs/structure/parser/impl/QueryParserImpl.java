@@ -14,6 +14,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -282,6 +283,15 @@ public class QueryParserImpl extends QBaseVisitor<Object> implements QueryParser
      */
     @Override
     public Object visitConceptname(QParser.ConceptnameContext ctx) {
-        return this.ontology.getClassMap().get((String) this.visitWords(ctx.words()));
+
+        String nameOfObject = (String) this.visitWords(ctx.words());
+
+        OWLClass foundClass  = this.ontology.getClassMap().get(nameOfObject);
+
+
+        if (foundClass == null) {
+            return this.ontology.addClass(nameOfObject);
+        }
+        return foundClass;
     }
 }
