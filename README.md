@@ -1,4 +1,4 @@
-# Ontology-Mediated Querying for Property Graphs
+# Ontology-Mediated Query Answering for Property Graphs
 
 ## About the Project
 
