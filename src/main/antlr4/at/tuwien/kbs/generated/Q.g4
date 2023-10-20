@@ -34,6 +34,6 @@ words : WORD ('_' WORD)* ;
 
 WORD : LETTER+ ;
 
-fragment LETTER : ('a'..'z' | 'A'..'Z') ;
+fragment LETTER : [a-zA-Z] ;
 
 UNKNOWN_CHAR : . ;

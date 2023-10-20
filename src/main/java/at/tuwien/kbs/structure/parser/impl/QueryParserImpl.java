@@ -36,6 +36,8 @@ public class QueryParserImpl extends QBaseVisitor<Object> implements QueryParser
 
         ParseTree tree = parser.query();
 
+//        System.out.println(tree.toStringTree(parser));
+
         return (Query) this.visit(tree);
     }
 
@@ -136,14 +138,22 @@ public class QueryParserImpl extends QBaseVisitor<Object> implements QueryParser
      */
     @Override
     public Object visitConceptnames(QParser.ConceptnamesContext ctx) {
+
         Set<OWLClass> conceptNames = new HashSet<>();
         for (int i = 0; i < ctx.getChildCount(); i++) {
             ParseTree c = ctx.getChild(i);
+
+//            System.out.println("Creating ConceptNames, current parseTree:");
+//            System.out.println(c.toStringTree());
+
             Object result = c.accept(this);
 
             if (result != null) {
                 conceptNames.add((OWLClass) result);
             }
+//            else {
+//                System.out.println("Not adding result from parsetree " + c.toStringTree());
+//            }
         }
         return conceptNames;
     }

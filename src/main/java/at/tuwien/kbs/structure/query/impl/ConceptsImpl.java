@@ -24,6 +24,11 @@ public class ConceptsImpl implements Concepts {
     public ConceptsImpl(Set<OWLClassExpression> conceptNames, Term term) {
         this.conceptNames = conceptNames;
         this.term = term;
+
+        if (conceptNames.size() == 0) {
+            throw new RuntimeException();
+        }
+
     }
 
     @Override
@@ -51,9 +56,11 @@ public class ConceptsImpl implements Concepts {
 
     @Override
     public String toString() {
+
         String conceptString = this.conceptNames.stream()
                 .map(p -> p.asOWLClass().getIRI().getFragment())
                 .collect(Collectors.joining("|"));
+
         if (this.conceptNames.size() > 1) {
             conceptString = '(' + conceptString + ')';
         }

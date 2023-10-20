@@ -46,6 +46,11 @@
             <artifactId>maven-compat</artifactId>
             <version>3.8.5</version>
         </dependency>
+        <dependency>
+            <groupId>net.sourceforge.argparse4j</groupId>
+            <artifactId>argparse4j</artifactId>
+            <version>0.9.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -85,7 +90,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        at.tuwien.kbs.client.Cli
+                                       at.tuwien.kbs.cli.Cli
                                     </mainClass>
                                 </manifest>
                             </archive>
