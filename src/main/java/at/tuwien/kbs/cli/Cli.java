@@ -16,8 +16,9 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Set;
-
+import java.nio.file.Files;
 
 import net.sourceforge.argparse4j.ArgumentParsers;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
@@ -63,7 +64,7 @@ public class Cli {
 
 
         // read ontology
-        System.out.println("please enter the path to the ontology file you want to work with");
+//        System.out.println("please enter the path to the ontology file you want to work with");
 //        String ontology_path = br.readLine();
         String ontology_path = ns.getString("ontology");
         try {
@@ -78,9 +79,11 @@ public class Cli {
         }
 
         // read query
-        System.out.println("Please enter the query you want to rewrite with the ontology");
+//        System.out.println("Please enter the query file you want to rewrite with the ontology");
 //        String queryString = br.readLine();
-        String queryString =  ns.getString("query");
+        Path queryFilePath = Path.of(ns.getString("query"));
+
+        String queryString = Files.readString(queryFilePath);
 
         QueryParser parser = new QueryParserImpl(ontology);
 
