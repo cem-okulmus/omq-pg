@@ -18,8 +18,7 @@ The query is copied to your clipboard, so you can copy-paste it into a Cypher sh
 
 ## Getting Started
 
-The rewriting prototype can be executed from the command line.
-It is interactive, so you will be asked to provide your arguments after executing the .jar file.
+The rewriting prototype can be executed from the command line. It requires the input to be provided via two file paths, one for the ontology and another for the query. Check the usage via "-h". 
 
 ### Prerequisites
 
@@ -46,20 +45,7 @@ To perform the rewriting, execute either [Cli](src/main/java/at/ac/tuwien/inform
 ```cmd
 java -jar <pathToJar><jarname>.jar
 ```
-The prototype writes instructions to the console output.
-For example, to run the rewriting with an ontology from the [test resources](/src/test/resources):
-```cmd
-Please enter a path to an ontology file: 
-src/test/resources/paths2.owl
-```
-Then, we can provide a query:
-```cmd
-q(x):-A(x),r*(x,y),B(y)
-```
-And finally, the tool tells us that rewriting has been completed:
-```cmd
-Your query has been rewritten. It has been copied to your system clipboard.
-```
+The command line tool expects two arguments, a file path to an OWL2 ontolgy  and a file path to a query, in our custom syntax (see the test/resources directory for examples and an informal description below). 
 
 ## Ontology
 
