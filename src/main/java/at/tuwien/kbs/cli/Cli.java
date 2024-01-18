@@ -12,9 +12,6 @@ import at.tuwien.kbs.translation.Translator;
 import at.tuwien.kbs.translation.impl.CypherTranslator;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
-import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Set;
@@ -103,13 +100,13 @@ public class Cli {
 
         System.out.printf("Translated Query:\n %s\n", translatedQuery);
 
-        // copy query to clipboard
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Clipboard clipboard = toolkit.getSystemClipboard();
-        StringSelection strSel = new StringSelection(translatedQuery);
-        clipboard.setContents(strSel, null);
+//        // copy query to clipboard
+//        Toolkit toolkit = Toolkit.getDefaultToolkit();
+//        Clipboard clipboard = toolkit.getSystemClipboard();
+//        StringSelection strSel = new StringSelection(translatedQuery);
+//        clipboard.setContents(strSel, null);
 
         // "done" message
-        System.out.println("Your query has been rewritten. It has been copied to your system clipboard.");
+        System.out.println("Your query has been rewritten.");
     }
 }
